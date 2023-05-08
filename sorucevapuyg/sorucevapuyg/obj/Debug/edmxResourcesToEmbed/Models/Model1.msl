@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbfModel1StoreContainer" CdmEntityContainer="dbfEntities2">
+    <EntitySetMapping Name="Cevap">
+      <EntityTypeMapping TypeName="dbfModel1.Cevap">
+        <MappingFragment StoreEntitySet="Cevap">
+          <ScalarProperty Name="CevapId" ColumnName="CevapId" />
+          <ScalarProperty Name="CevapIcerik" ColumnName="CevapIcerik" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+          <ScalarProperty Name="SoruId" ColumnName="SoruId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanici">
+      <EntityTypeMapping TypeName="dbfModel1.Kullanici">
+        <MappingFragment StoreEntitySet="Kullanici">
+          <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+          <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+          <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Soru">
+      <EntityTypeMapping TypeName="dbfModel1.Soru">
+        <MappingFragment StoreEntitySet="Soru">
+          <ScalarProperty Name="SoruId" ColumnName="SoruId" />
+          <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+          <ScalarProperty Name="SoruIcerik" ColumnName="SoruIcerik" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

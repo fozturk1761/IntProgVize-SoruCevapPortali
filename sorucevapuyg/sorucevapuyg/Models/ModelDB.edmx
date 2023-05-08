@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbfModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cevap">
+          <Key>
+            <PropertyRef Name="CevapId" />
+          </Key>
+          <Property Name="CevapId" Type="int" Nullable="false" />
+          <Property Name="CevapIcerik" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="KullaniciId" Type="int" Nullable="false" />
+          <Property Name="SoruId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciId" />
+          </Key>
+          <Property Name="KullaniciId" Type="int" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Eposta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Soru">
+          <Key>
+            <PropertyRef Name="SoruId" />
+          </Key>
+          <Property Name="SoruId" Type="int" Nullable="false" />
+          <Property Name="Baslik" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoruIcerik" Type="nchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="KullaniciId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Cevap__Kullanici__625A9A57">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="Cevap" Type="Self.Cevap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciId" />
+            </Principal>
+            <Dependent Role="Cevap">
+              <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cevap__SoruId__634EBE90">
+          <End Role="Soru" Type="Self.Soru" Multiplicity="1" />
+          <End Role="Cevap" Type="Self.Cevap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soru">
+              <PropertyRef Name="SoruId" />
+            </Principal>
+            <Dependent Role="Cevap">
+              <PropertyRef Name="SoruId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soru_ToKullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="Soru" Type="Self.Soru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciId" />
+            </Principal>
+            <Dependent Role="Soru">
+              <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbfModelStoreContainer">
+          <EntitySet Name="Cevap" EntityType="Self.Cevap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Soru" EntityType="Self.Soru" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cevap__Kullanici__625A9A57" Association="Self.FK__Cevap__Kullanici__625A9A57">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Cevap" EntitySet="Cevap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cevap__SoruId__634EBE90" Association="Self.FK__Cevap__SoruId__634EBE90">
+            <End Role="Soru" EntitySet="Soru" />
+            <End Role="Cevap" EntitySet="Cevap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soru_ToKullanici" Association="Self.FK_Soru_ToKullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Soru" EntitySet="Soru" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbfModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cevap">
+          <Key>
+            <PropertyRef Name="CevapId" />
+          </Key>
+          <Property Name="CevapId" Type="Int32" Nullable="false" />
+          <Property Name="CevapIcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="KullaniciId" Type="Int32" Nullable="false" />
+          <Property Name="SoruId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__Cevap__Kullanici__625A9A57" FromRole="Cevap" ToRole="Kullanici" />
+          <NavigationProperty Name="Soru" Relationship="Self.FK__Cevap__SoruId__634EBE90" FromRole="Cevap" ToRole="Soru" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciId" />
+          </Key>
+          <Property Name="KullaniciId" Type="Int32" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cevap" Relationship="Self.FK__Cevap__Kullanici__625A9A57" FromRole="Kullanici" ToRole="Cevap" />
+          <NavigationProperty Name="Soru" Relationship="Self.FK_Soru_ToKullanici" FromRole="Kullanici" ToRole="Soru" />
+        </EntityType>
+        <EntityType Name="Soru">
+          <Key>
+            <PropertyRef Name="SoruId" />
+          </Key>
+          <Property Name="SoruId" Type="Int32" Nullable="false" />
+          <Property Name="Baslik" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SoruIcerik" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="KullaniciId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cevap" Relationship="Self.FK__Cevap__SoruId__634EBE90" FromRole="Soru" ToRole="Cevap" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK_Soru_ToKullanici" FromRole="Soru" ToRole="Kullanici" />
+        </EntityType>
+        <Association Name="FK__Cevap__Kullanici__625A9A57">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="Cevap" Type="Self.Cevap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciId" />
+            </Principal>
+            <Dependent Role="Cevap">
+              <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cevap__SoruId__634EBE90">
+          <End Role="Soru" Type="Self.Soru" Multiplicity="1" />
+          <End Role="Cevap" Type="Self.Cevap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soru">
+              <PropertyRef Name="SoruId" />
+            </Principal>
+            <Dependent Role="Cevap">
+              <PropertyRef Name="SoruId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soru_ToKullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="Soru" Type="Self.Soru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciId" />
+            </Principal>
+            <Dependent Role="Soru">
+              <PropertyRef Name="KullaniciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbfEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cevap" EntityType="Self.Cevap" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+          <EntitySet Name="Soru" EntityType="Self.Soru" />
+          <AssociationSet Name="FK__Cevap__Kullanici__625A9A57" Association="Self.FK__Cevap__Kullanici__625A9A57">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Cevap" EntitySet="Cevap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cevap__SoruId__634EBE90" Association="Self.FK__Cevap__SoruId__634EBE90">
+            <End Role="Soru" EntitySet="Soru" />
+            <End Role="Cevap" EntitySet="Cevap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soru_ToKullanici" Association="Self.FK_Soru_ToKullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Soru" EntitySet="Soru" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbfModelStoreContainer" CdmEntityContainer="dbfEntities">
+          <EntitySetMapping Name="Cevap">
+            <EntityTypeMapping TypeName="dbfModel.Cevap">
+              <MappingFragment StoreEntitySet="Cevap">
+                <ScalarProperty Name="CevapId" ColumnName="CevapId" />
+                <ScalarProperty Name="CevapIcerik" ColumnName="CevapIcerik" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+                <ScalarProperty Name="SoruId" ColumnName="SoruId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanici">
+            <EntityTypeMapping TypeName="dbfModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Soru">
+            <EntityTypeMapping TypeName="dbfModel.Soru">
+              <MappingFragment StoreEntitySet="Soru">
+                <ScalarProperty Name="SoruId" ColumnName="SoruId" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="SoruIcerik" ColumnName="SoruIcerik" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="KullaniciId" ColumnName="KullaniciId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
